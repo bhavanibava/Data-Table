@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="./bootstrap4.1.css">
+        <link rel="stylesheet" href="./bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="./DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+        <script src="./jquery-3.3.1.min.js"></script>
+        <script src="./DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+        <script src="./DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+        <style>
+            body{
+                padding : 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <form id="formId" action="/task" method="POST"> -->
+            <!-- <input type="text" id="titleId" placeholder="Title">
+            <input type="text" id="descriptionId" placeholder="Description"> -->
+        <table id="table" class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                </tr>
+            </tfoot>
+        </table>
+        <!-- <button id="button1" class="btn">Display data</button> -->
+    <!-- </form> -->
+        <script>
+            jQuery(document).ready(function(){
+                // jQuery("#formId").submit(function(){
+                //     var title = jQuery("#titleId").val();
+                //     var des = jQuery("#descriptionId").val();
+                //     alert("given data's are: "+title+" & "+des);
+                //     var mydata = title+" & "+des;
+                //     return mydata;
+                // });
+                jQuery("#table").DataTable({
+                    'processing' : 'true',
+                    'serverSide' : 'true',
+                    'ajax' : {
+                        url : '/get',
+                        method : 'get',
+                        dataType : 'json',
+                        contentType : 'application/json; charset=utf-8',
+                        // headers: {
+        				// 	'Content-Type': 'application/json',
+    					// },
+                        success : function(tasks){
+                            var getData=JSON.stringify(tasks);
+                            console.log("Get data from mongodb: "+getData);
+                            jQuery("#table").append(getData);
+                            alert("get method data : "+getData);
+                        }
+                    }
+                });
+                // jQuery("#button1").click(function(){
+                //     alert("button clicked successfully ");
+                //     jQuery("#table").append();
+                // })
+            });
+        </script>
+    </body>
+</html>
