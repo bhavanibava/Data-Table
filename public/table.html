@@ -42,18 +42,11 @@
     <!-- </form> -->
         <script>
             jQuery(document).ready(function(){
-                // jQuery("#formId").submit(function(){
-                //     var title = jQuery("#titleId").val();
-                //     var des = jQuery("#descriptionId").val();
-                //     alert("given data's are: "+title+" & "+des);
-                //     var mydata = title+" & "+des;
-                //     return mydata;
-                // });
                 jQuery("#table").DataTable({
                     'processing' : 'true',
                     'serverSide' : 'true',
                     'ajax' : {
-                        url : '/get',
+                        url : '/getTask',
                         method : 'get',
                         dataType : 'json',
                         contentType : 'application/json; charset=utf-8',
@@ -68,10 +61,6 @@
                         }
                     }
                 });
-                // jQuery("#button1").click(function(){
-                //     alert("button clicked successfully ");
-                //     jQuery("#table").append();
-                // })
             });
         </script>
     </body>
