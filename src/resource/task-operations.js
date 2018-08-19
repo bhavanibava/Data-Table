@@ -20,10 +20,11 @@ var getDataFromDB = function(req,res){
         idOperation=tasks._id;
         // datFormatasRequiredByTables     
         var formedDataFromAvailableTasks = tasks.map(function getFullName(tasks,index) {
-            var taskData = [tasks.title,tasks.description];
+            var taskData = [tasks.title,tasks.description]
             return taskData;
         });
-        // formedDataFromAvailableTasks = formedDataFromAvailableTasks.
+        // var splitData = formedDataFromAvailableTasks.join(" ");
+        // console.log("split data : ",splitData);
         console.log("task values..... :",formedDataFromAvailableTasks);
         // fuse the provided logic
         var dataFormatasRequiredByTables = {data:[formedDataFromAvailableTasks]}
