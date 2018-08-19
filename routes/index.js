@@ -14,7 +14,10 @@ router.post('/',function(req,res,next){
     // console.log('data from html: ',data);
 	task.createtaskdetails(req,res);
 });
-router.get('/get',function(req,res,next){
+router.get('/getall',function(req,res,next){
 	task.getalltastdetails(req,res);
+});
+router.get('/getTask',function(req,res,next){
+	task.getDataFromDB(req,res);
 });
 module.exports = router;

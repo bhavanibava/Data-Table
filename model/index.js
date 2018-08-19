@@ -11,10 +11,6 @@ var Task = new Schema({
     content:{
         type : String
     },
-    idOperation: {
-        type : Number,
-        index : true
-    },
     status : {
         type : String
     },

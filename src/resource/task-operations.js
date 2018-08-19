@@ -3,15 +3,9 @@ var _=require('underscore');
 var idOperation;
 var getalltastdetails = function(req,res){
     return Task.find(function(error,tasks){
-        // datFormatasRequiredByTables 
-        var formedDataFromAvailableTasks = [];
-        // fuse the provided logic
-        var datFormatasRequiredByTables = {data:[formedDataFromAvailableTasks]}
         if(!error){
-            res.send(datFormatasRequiredByTables);
+            res.send(tasks);
             return tasks
-            // console.log("idOperation : "+idOperation);
-            // console.log('get task details successfully, task: '+tasks);
         }
         else{
             res.send({
@@ -21,16 +15,22 @@ var getalltastdetails = function(req,res){
         }
     }) 
 }
-var getData = function(req,res){
+var getDataFromDB = function(req,res){
     return Task.find(function(error,tasks){
-        // datFormatasRequiredByTables 
-        var formedDataFromAvailableTasks = [];
+        idOperation=tasks._id;
+        // datFormatasRequiredByTables     
+        var formedDataFromAvailableTasks = tasks.map(function getFullName(tasks,index) {
+            var taskData = [tasks.title,tasks.description];
+            return taskData;
+        });
+        // formedDataFromAvailableTasks = formedDataFromAvailableTasks.
+        console.log("task values..... :",formedDataFromAvailableTasks);
         // fuse the provided logic
-        var datFormatasRequiredByTables = {data:[formedDataFromAvailableTasks]}
+        var dataFormatasRequiredByTables = {data:[formedDataFromAvailableTasks]}
+        console.log("dataFormatasRequiredByTables..... :",dataFormatasRequiredByTables);
         if(!error){
-            res.send(datFormatasRequiredByTables);
-            return tasks
-            // console.log("idOperation : "+idOperation);
+            res.send(dataFormatasRequiredByTables);
+            return dataFormatasRequiredByTables;
             // console.log('get task details successfully, task: '+tasks);
         }
         else{
@@ -49,22 +49,12 @@ var createtaskdetails = function(req,res){
         content : req.body.content
     })
     console.log("Given data : ",task);
-    idOperation=task._id;
-    var taskDatas = [task,idOperation];
-    console.log("Given data : ",taskDatas);
-    // console.log("idOperation : "+idOperation);
-    taskDatas.map(taskData, function(task){ 
-        var taskAsArray=[];
-        taskAsArray=[task.title, task.description]; 
-        return taskAsArray; 
-        console.log("task as array[]..... :",taskAsArray);
-    })
     return task.save(function(error){
         if(!error){
             console.log('Task created successfully');
             res.json({
                 statusCode : 200,
-                Task : taskData
+                Task : task
             });
         }
         else{
@@ -76,4 +66,5 @@ var createtaskdetails = function(req,res){
     })
 }
 exports.getalltastdetails = getalltastdetails;
+exports.getDataFromDB = getDataFromDB;
 exports.createtaskdetails = createtaskdetails;
