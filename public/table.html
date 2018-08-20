@@ -20,10 +20,9 @@
         <table id="table" class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Created Date</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>createdDate</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,10 +30,9 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Created Date</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>createdDate</th>
                 </tr>
             </tfoot>
         </table>
@@ -45,20 +43,20 @@
                 jQuery("#table").DataTable({
                     'processing' : 'true',
                     'serverSide' : 'true',
+                    'search' : {
+                        'search' : 'true'
+                    },
                     'ajax' : {
                         url : '/getTask',
-                        method : 'get',
-                        dataType : 'json',
-                        contentType : 'application/json; charset=utf-8',
-                        // headers: {
-        				// 	'Content-Type': 'application/json',
-    					// },
-                        success : function(tasks){
-                            var getData=JSON.stringify(tasks);
-                            console.log("Get data from mongodb: "+getData);
-                            jQuery("#table").append(getData);
-                            alert("get method data : "+getData);
-                        }
+                        // method : 'get',
+                        // dataType : 'json',
+                        // contentType : 'application/json; charset=utf-8',
+                        // success : function(tasks){
+                        //     var getData=JSON.stringify(tasks);
+                        //     // console.log("Get data from mongodb: "+getData);
+                        //     // jQuery("#table").append(getData);
+                        //     alert("get method data : "+getData);
+                        // }
                     }
                 });
             });
