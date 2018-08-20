@@ -20,14 +20,21 @@ var getDataFromDB = function(req,res){
         idOperation=tasks._id;
         // datFormatasRequiredByTables     
         var formedDataFromAvailableTasks = tasks.map(function getFullName(tasks,index) {
-            var taskData = [tasks.title,tasks.description]
+            var taskData = [
+                tasks.title,
+                tasks.description,
+                tasks.createdDate
+            ]
             return taskData;
         });
-        // var splitData = formedDataFromAvailableTasks.join(" ");
-        // console.log("split data : ",splitData);
         console.log("task values..... :",formedDataFromAvailableTasks);
         // fuse the provided logic
-        var dataFormatasRequiredByTables = {data:[formedDataFromAvailableTasks]}
+        var dataFormatasRequiredByTables = {
+            draw : 1,
+            recordsTotal : tasks.length,
+            recordsFiltered : tasks.length,
+            data:formedDataFromAvailableTasks
+        }
         console.log("dataFormatasRequiredByTables..... :",dataFormatasRequiredByTables);
         if(!error){
             res.send(dataFormatasRequiredByTables);
